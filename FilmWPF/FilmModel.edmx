@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="film1e4Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="acteur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="appartenir">
+          <Key>
+            <PropertyRef Name="NumFilm" />
+            <PropertyRef Name="NumGenre" />
+          </Key>
+          <Property Name="NumFilm" Type="int" Nullable="false" />
+          <Property Name="NumGenre" Type="int" Nullable="false" />
+          <Property Name="Important" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cinema">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Duree" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="NbEntrees" Type="int" Nullable="false" />
+          <Property Name="NumRealisateur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jouer">
+          <Key>
+            <PropertyRef Name="NumFilm" />
+            <PropertyRef Name="NumActeur" />
+          </Key>
+          <Property Name="NumFilm" Type="int" Nullable="false" />
+          <Property Name="NumActeur" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="parrution">
+          <Key>
+            <PropertyRef Name="NumFilm" />
+            <PropertyRef Name="NumSalle" />
+          </Key>
+          <Property Name="NumFilm" Type="int" Nullable="false" />
+          <Property Name="NumSalle" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="DateNaissance" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="realisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PhotoRealisateur" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NbPlaces" Type="int" Nullable="false" />
+          <Property Name="IdCinema" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spectateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <Association Name="acteur_ibfk_1">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="acteur" Type="Self.acteur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="acteur">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="appartenir_ibfk_1">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="appartenir" Type="Self.appartenir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="appartenir">
+              <PropertyRef Name="NumFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="appartenir_ibfk_2">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="appartenir" Type="Self.appartenir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="appartenir">
+              <PropertyRef Name="NumGenre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="jouer_ibfk_1">
+          <End Role="acteur" Type="Self.acteur" Multiplicity="1" />
+          <End Role="jouer" Type="Self.jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acteur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="jouer">
+              <PropertyRef Name="NumActeur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="jouer_ibfk_2">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="jouer" Type="Self.jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="jouer">
+              <PropertyRef Name="NumFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parrution_ibfk_1">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="parrution" Type="Self.parrution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="parrution">
+              <PropertyRef Name="NumFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parrution_ibfk_2">
+          <End Role="salle" Type="Self.salle" Multiplicity="1" />
+          <End Role="parrution" Type="Self.parrution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="parrution">
+              <PropertyRef Name="NumSalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="realisateur_ibfk_1">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="realisateur" Type="Self.realisateur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="realisateur">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="salle_ibfk_1">
+          <End Role="cinema" Type="Self.cinema" Multiplicity="1" />
+          <End Role="salle" Type="Self.salle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cinema">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="salle">
+              <PropertyRef Name="IdCinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="spectateur_ibfk_1">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="spectateur" Type="Self.spectateur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="spectateur">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="film1e4ModelStoreContainer">
+          <EntitySet Name="acteur" EntityType="Self.acteur" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="appartenir" EntityType="Self.appartenir" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="cinema" EntityType="Self.cinema" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="film" EntityType="Self.film" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="genre" EntityType="Self.genre" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="jouer" EntityType="Self.jouer" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="parrution" EntityType="Self.parrution" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="personne" EntityType="Self.personne" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="realisateur" EntityType="Self.realisateur" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="salle" EntityType="Self.salle" Schema="film1e4" store:Type="Tables" />
+          <EntitySet Name="spectateur" EntityType="Self.spectateur" Schema="film1e4" store:Type="Tables" />
+          <AssociationSet Name="acteur_ibfk_1" Association="Self.acteur_ibfk_1">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="acteur" EntitySet="acteur" />
+          </AssociationSet>
+          <AssociationSet Name="appartenir_ibfk_1" Association="Self.appartenir_ibfk_1">
+            <End Role="film" EntitySet="film" />
+            <End Role="appartenir" EntitySet="appartenir" />
+          </AssociationSet>
+          <AssociationSet Name="appartenir_ibfk_2" Association="Self.appartenir_ibfk_2">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="appartenir" EntitySet="appartenir" />
+          </AssociationSet>
+          <AssociationSet Name="jouer_ibfk_1" Association="Self.jouer_ibfk_1">
+            <End Role="acteur" EntitySet="acteur" />
+            <End Role="jouer" EntitySet="jouer" />
+          </AssociationSet>
+          <AssociationSet Name="jouer_ibfk_2" Association="Self.jouer_ibfk_2">
+            <End Role="film" EntitySet="film" />
+            <End Role="jouer" EntitySet="jouer" />
+          </AssociationSet>
+          <AssociationSet Name="parrution_ibfk_1" Association="Self.parrution_ibfk_1">
+            <End Role="film" EntitySet="film" />
+            <End Role="parrution" EntitySet="parrution" />
+          </AssociationSet>
+          <AssociationSet Name="parrution_ibfk_2" Association="Self.parrution_ibfk_2">
+            <End Role="salle" EntitySet="salle" />
+            <End Role="parrution" EntitySet="parrution" />
+          </AssociationSet>
+          <AssociationSet Name="realisateur_ibfk_1" Association="Self.realisateur_ibfk_1">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="realisateur" EntitySet="realisateur" />
+          </AssociationSet>
+          <AssociationSet Name="salle_ibfk_1" Association="Self.salle_ibfk_1">
+            <End Role="cinema" EntitySet="cinema" />
+            <End Role="salle" EntitySet="salle" />
+          </AssociationSet>
+          <AssociationSet Name="spectateur_ibfk_1" Association="Self.spectateur_ibfk_1">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="spectateur" EntitySet="spectateur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="film1e4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="acteur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="personne" Relationship="Self.acteur_ibfk_1" FromRole="acteur" ToRole="personne" />
+          <NavigationProperty Name="jouer" Relationship="Self.jouer_ibfk_1" FromRole="acteur" ToRole="jouer" />
+        </EntityType>
+        <EntityType Name="appartenir">
+          <Key>
+            <PropertyRef Name="NumFilm" />
+            <PropertyRef Name="NumGenre" />
+          </Key>
+          <Property Name="NumFilm" Type="Int32" Nullable="false" />
+          <Property Name="NumGenre" Type="Int32" Nullable="false" />
+          <Property Name="Important" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="film" Relationship="Self.appartenir_ibfk_1" FromRole="appartenir" ToRole="film" />
+          <NavigationProperty Name="genre" Relationship="Self.appartenir_ibfk_2" FromRole="appartenir" ToRole="genre" />
+        </EntityType>
+        <EntityType Name="cinema">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="salle" Relationship="Self.salle_ibfk_1" FromRole="cinema" ToRole="salle" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Duree" Type="Time" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NbEntrees" Type="Int32" Nullable="false" />
+          <Property Name="NumRealisateur" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="appartenir" Relationship="Self.appartenir_ibfk_1" FromRole="film" ToRole="appartenir" />
+          <NavigationProperty Name="jouer" Relationship="Self.jouer_ibfk_2" FromRole="film" ToRole="jouer" />
+          <NavigationProperty Name="parrution" Relationship="Self.parrution_ibfk_1" FromRole="film" ToRole="parrution" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="appartenir" Relationship="Self.appartenir_ibfk_2" FromRole="genre" ToRole="appartenir" />
+        </EntityType>
+        <EntityType Name="jouer">
+          <Key>
+            <PropertyRef Name="NumFilm" />
+            <PropertyRef Name="NumActeur" />
+          </Key>
+          <Property Name="NumFilm" Type="Int32" Nullable="false" />
+          <Property Name="NumActeur" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="acteur" Relationship="Self.jouer_ibfk_1" FromRole="jouer" ToRole="acteur" />
+          <NavigationProperty Name="film" Relationship="Self.jouer_ibfk_2" FromRole="jouer" ToRole="film" />
+        </EntityType>
+        <EntityType Name="parrution">
+          <Key>
+            <PropertyRef Name="NumFilm" />
+            <PropertyRef Name="NumSalle" />
+          </Key>
+          <Property Name="NumFilm" Type="Int32" Nullable="false" />
+          <Property Name="NumSalle" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="film" Relationship="Self.parrution_ibfk_1" FromRole="parrution" ToRole="film" />
+          <NavigationProperty Name="salle" Relationship="Self.parrution_ibfk_2" FromRole="parrution" ToRole="salle" />
+        </EntityType>
+        <EntityType Name="personne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateNaissance" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="acteur" Relationship="Self.acteur_ibfk_1" FromRole="personne" ToRole="acteur" />
+          <NavigationProperty Name="realisateur" Relationship="Self.realisateur_ibfk_1" FromRole="personne" ToRole="realisateur" />
+          <NavigationProperty Name="spectateur" Relationship="Self.spectateur_ibfk_1" FromRole="personne" ToRole="spectateur" />
+        </EntityType>
+        <EntityType Name="realisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PhotoRealisateur" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="personne" Relationship="Self.realisateur_ibfk_1" FromRole="realisateur" ToRole="personne" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NbPlaces" Type="Int32" Nullable="false" />
+          <Property Name="IdCinema" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cinema" Relationship="Self.salle_ibfk_1" FromRole="salle" ToRole="cinema" />
+          <NavigationProperty Name="parrution" Relationship="Self.parrution_ibfk_2" FromRole="salle" ToRole="parrution" />
+        </EntityType>
+        <EntityType Name="spectateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="personne" Relationship="Self.spectateur_ibfk_1" FromRole="spectateur" ToRole="personne" />
+        </EntityType>
+        <Association Name="acteur_ibfk_1">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="acteur" Type="Self.acteur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="acteur">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="jouer_ibfk_1">
+          <End Role="acteur" Type="Self.acteur" Multiplicity="1" />
+          <End Role="jouer" Type="Self.jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acteur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="jouer">
+              <PropertyRef Name="NumActeur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="appartenir_ibfk_1">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="appartenir" Type="Self.appartenir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="appartenir">
+              <PropertyRef Name="NumFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="appartenir_ibfk_2">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="appartenir" Type="Self.appartenir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="appartenir">
+              <PropertyRef Name="NumGenre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="salle_ibfk_1">
+          <End Role="cinema" Type="Self.cinema" Multiplicity="1" />
+          <End Role="salle" Type="Self.salle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cinema">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="salle">
+              <PropertyRef Name="IdCinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="jouer_ibfk_2">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="jouer" Type="Self.jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="jouer">
+              <PropertyRef Name="NumFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parrution_ibfk_1">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="parrution" Type="Self.parrution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="parrution">
+              <PropertyRef Name="NumFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parrution_ibfk_2">
+          <End Role="salle" Type="Self.salle" Multiplicity="1" />
+          <End Role="parrution" Type="Self.parrution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="parrution">
+              <PropertyRef Name="NumSalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="realisateur_ibfk_1">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="realisateur" Type="Self.realisateur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="realisateur">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="spectateur_ibfk_1">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="spectateur" Type="Self.spectateur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="spectateur">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="film1e4Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="acteur" EntityType="Self.acteur" />
+          <EntitySet Name="appartenir" EntityType="Self.appartenir" />
+          <EntitySet Name="cinema" EntityType="Self.cinema" />
+          <EntitySet Name="film" EntityType="Self.film" />
+          <EntitySet Name="genre" EntityType="Self.genre" />
+          <EntitySet Name="jouer" EntityType="Self.jouer" />
+          <EntitySet Name="parrution" EntityType="Self.parrution" />
+          <EntitySet Name="personne" EntityType="Self.personne" />
+          <EntitySet Name="realisateur" EntityType="Self.realisateur" />
+          <EntitySet Name="salle" EntityType="Self.salle" />
+          <EntitySet Name="spectateur" EntityType="Self.spectateur" />
+          <AssociationSet Name="acteur_ibfk_1" Association="Self.acteur_ibfk_1">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="acteur" EntitySet="acteur" />
+          </AssociationSet>
+          <AssociationSet Name="jouer_ibfk_1" Association="Self.jouer_ibfk_1">
+            <End Role="acteur" EntitySet="acteur" />
+            <End Role="jouer" EntitySet="jouer" />
+          </AssociationSet>
+          <AssociationSet Name="appartenir_ibfk_1" Association="Self.appartenir_ibfk_1">
+            <End Role="film" EntitySet="film" />
+            <End Role="appartenir" EntitySet="appartenir" />
+          </AssociationSet>
+          <AssociationSet Name="appartenir_ibfk_2" Association="Self.appartenir_ibfk_2">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="appartenir" EntitySet="appartenir" />
+          </AssociationSet>
+          <AssociationSet Name="salle_ibfk_1" Association="Self.salle_ibfk_1">
+            <End Role="cinema" EntitySet="cinema" />
+            <End Role="salle" EntitySet="salle" />
+          </AssociationSet>
+          <AssociationSet Name="jouer_ibfk_2" Association="Self.jouer_ibfk_2">
+            <End Role="film" EntitySet="film" />
+            <End Role="jouer" EntitySet="jouer" />
+          </AssociationSet>
+          <AssociationSet Name="parrution_ibfk_1" Association="Self.parrution_ibfk_1">
+            <End Role="film" EntitySet="film" />
+            <End Role="parrution" EntitySet="parrution" />
+          </AssociationSet>
+          <AssociationSet Name="parrution_ibfk_2" Association="Self.parrution_ibfk_2">
+            <End Role="salle" EntitySet="salle" />
+            <End Role="parrution" EntitySet="parrution" />
+          </AssociationSet>
+          <AssociationSet Name="realisateur_ibfk_1" Association="Self.realisateur_ibfk_1">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="realisateur" EntitySet="realisateur" />
+          </AssociationSet>
+          <AssociationSet Name="spectateur_ibfk_1" Association="Self.spectateur_ibfk_1">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="spectateur" EntitySet="spectateur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="film1e4ModelStoreContainer" CdmEntityContainer="film1e4Entities">
+          <EntitySetMapping Name="acteur">
+            <EntityTypeMapping TypeName="film1e4Model.acteur">
+              <MappingFragment StoreEntitySet="acteur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="appartenir">
+            <EntityTypeMapping TypeName="film1e4Model.appartenir">
+              <MappingFragment StoreEntitySet="appartenir">
+                <ScalarProperty Name="NumFilm" ColumnName="NumFilm" />
+                <ScalarProperty Name="NumGenre" ColumnName="NumGenre" />
+                <ScalarProperty Name="Important" ColumnName="Important" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cinema">
+            <EntityTypeMapping TypeName="film1e4Model.cinema">
+              <MappingFragment StoreEntitySet="cinema">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film">
+            <EntityTypeMapping TypeName="film1e4Model.film">
+              <MappingFragment StoreEntitySet="film">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Duree" ColumnName="Duree" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="NbEntrees" ColumnName="NbEntrees" />
+                <ScalarProperty Name="NumRealisateur" ColumnName="NumRealisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genre">
+            <EntityTypeMapping TypeName="film1e4Model.genre">
+              <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jouer">
+            <EntityTypeMapping TypeName="film1e4Model.jouer">
+              <MappingFragment StoreEntitySet="jouer">
+                <ScalarProperty Name="NumFilm" ColumnName="NumFilm" />
+                <ScalarProperty Name="NumActeur" ColumnName="NumActeur" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parrution">
+            <EntityTypeMapping TypeName="film1e4Model.parrution">
+              <MappingFragment StoreEntitySet="parrution">
+                <ScalarProperty Name="NumFilm" ColumnName="NumFilm" />
+                <ScalarProperty Name="NumSalle" ColumnName="NumSalle" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personne">
+            <EntityTypeMapping TypeName="film1e4Model.personne">
+              <MappingFragment StoreEntitySet="personne">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="DateNaissance" ColumnName="DateNaissance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="realisateur">
+            <EntityTypeMapping TypeName="film1e4Model.realisateur">
+              <MappingFragment StoreEntitySet="realisateur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PhotoRealisateur" ColumnName="PhotoRealisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salle">
+            <EntityTypeMapping TypeName="film1e4Model.salle">
+              <MappingFragment StoreEntitySet="salle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NbPlaces" ColumnName="NbPlaces" />
+                <ScalarProperty Name="IdCinema" ColumnName="IdCinema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="spectateur">
+            <EntityTypeMapping TypeName="film1e4Model.spectateur">
+              <MappingFragment StoreEntitySet="spectateur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

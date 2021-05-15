@@ -1,0 +1,24 @@
+﻿<Window x:Class="FilmWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FilmWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="562" Width="1000">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnFilmGerer" Content="Gérer les Films" Grid.Column="0" Grid.Row="1" FontSize="40" Click="btnFilmGerer_Click"/>
+        <Button x:Name="btnSpectateurGerer" Content="Gérer les Spectateurs" Grid.Column="2" Grid.Row="1" FontSize="40" Click="btnSpectateurGerer_Click"/>
+    </Grid>
+</Window>
