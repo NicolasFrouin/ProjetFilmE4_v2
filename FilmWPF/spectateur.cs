@@ -14,10 +14,18 @@ namespace FilmWPF
     
     public partial class spectateur
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public spectateur()
+        {
+            this.reserver = new HashSet<reserver>();
+        }
+    
         public int Id { get; set; }
         public string Adresse { get; set; }
         public string Mail { get; set; }
     
         public virtual personne personne { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<reserver> reserver { get; set; }
     }
 }

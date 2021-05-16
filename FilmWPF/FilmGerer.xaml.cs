@@ -20,7 +20,7 @@ namespace FilmWPF
     /// </summary>
     public partial class FilmGerer : Window
     {
-        film1e4Entities gst;
+        filmEntities gst;
         public FilmGerer()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace FilmWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            gst = new film1e4Entities();
+            gst = new filmEntities();
             lstFilms.ItemsSource = gst.film.ToList();
             cboGenre.ItemsSource = gst.genre.ToList();
             cboRealisateur.ItemsSource = gst.realisateur.ToList();
@@ -37,7 +37,7 @@ namespace FilmWPF
 
         private void lstFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var idFilm = (lstFilms.SelectedItem as film).Id;
+            var idFilm = (lstFilms.SelectedItem as film).Id; // car un Linq ne veut pas de relation comme cela
             var lesActeurs = from a in gst.acteur
                                      join j in gst.jouer on a.Id equals j.NumActeur
                                      join f in gst.film on j.NumFilm equals f.Id
@@ -116,10 +116,10 @@ namespace FilmWPF
                     Image = ""
                 };
                 gst.film.Add(f);
-                gst.SaveChanges();
+                gst.SaveChanges(); // pour que l'Id du film soit donnée par la bdd en auto-incrément
                 foreach (acteur a in lstAllActeurs.SelectedItems)
                 {
-                    string leRole = Interaction.InputBox("Quel rôle a joué " + a.personne.Prenom + " " + a.personne.Nom + " ?", "Définition des rôles");
+                    string leRole = Interaction.InputBox("Quel rôle a joué " + a.personne.Prenom + " " + a.personne.Nom + " ?", "Définition des rôles"); // pour utiliser le Interactoin.InputBox, il faut "using Microsoft.VisualBasic;"
                     jouer j = new jouer
                     {
                         NumFilm = gst.film.ToList().FindLast(fi => fi.Titre == txtNomFilm.Text).Id,

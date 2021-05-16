@@ -12,19 +12,13 @@ namespace FilmWPF
     using System;
     using System.Collections.Generic;
     
-    public partial class realisateur
+    public partial class reserver
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public realisateur()
-        {
-            this.film = new HashSet<film>();
-        }
+        public int NumFilm { get; set; }
+        public int NumSpectateur { get; set; }
+        public System.DateTime DateHeure { get; set; }
     
-        public int Id { get; set; }
-        public string PhotoRealisateur { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<film> film { get; set; }
-        public virtual personne personne { get; set; }
+        public virtual film film { get; set; }
+        public virtual spectateur spectateur { get; set; }
     }
 }

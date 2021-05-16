@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FilmWPF"
         mc:Ignorable="d"
-        Title="FilmGerer" Height="562" Width="1000" Loaded="Window_Loaded">
+        Title="FilmGerer" Height="576" Width="1024" Loaded="Window_Loaded">
+    
     <Window.Resources>
         <DataTemplate x:Key="tplListeActeurs">
             <Border Name="brd" CornerRadius="5" BorderThickness="3" Width="70" Height="115" BorderBrush="Black" 

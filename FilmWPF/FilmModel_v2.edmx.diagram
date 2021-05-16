@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a351afb74f6c4ab6bcdf2b0ca4e38a09" Name="Diagram1">
+        <EntityTypeShape EntityType="film1e4Model_v2.acteur" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.appartenir" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.cinema" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.film" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.genre" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.jouer" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.parrution" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.personne" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.realisateur" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.reserver" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.salle" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="film1e4Model_v2.spectateur" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="film1e4Model_v2.acteur_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.jouer_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.appartenir_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.appartenir_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.salle_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.film_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.jouer_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.parrution_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.reserver_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.parrution_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.realisateur_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.spectateur_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="film1e4Model_v2.reserver_ibfk_1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

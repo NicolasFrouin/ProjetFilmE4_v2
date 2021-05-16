@@ -28,5 +28,15 @@ namespace FilmWPF
         {
 
         }
+
+        private void lstFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void lstActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

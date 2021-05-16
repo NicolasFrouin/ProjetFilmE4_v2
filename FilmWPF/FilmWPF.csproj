@@ -114,16 +114,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="acteur.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="appartenir.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="cinema.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="film.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="FilmModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -140,26 +140,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FilmModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="FilmModel_v2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilmModel_v2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FilmModel_v2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FilmModel_v2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilmModel_v2.edmx</DependentUpon>
+    </Compile>
     <Compile Include="genre.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="jouer.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="parrution.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="personne.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="realisateur.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="reserver.cs">
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="salle.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="spectateur.cs">
-      <DependentUpon>FilmModel.tt</DependentUpon>
+      <DependentUpon>FilmModel_v2.tt</DependentUpon>
     </Compile>
     <Compile Include="SpectateurGerer.xaml.cs">
       <DependentUpon>SpectateurGerer.xaml</DependentUpon>
@@ -213,6 +231,13 @@
     <None Include="FilmModel.edmx.diagram">
       <DependentUpon>FilmModel.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="FilmModel_v2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FilmModel_v2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FilmModel_v2.edmx.diagram">
+      <DependentUpon>FilmModel_v2.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -232,6 +257,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FilmModel.edmx</DependentUpon>
       <LastGenOutput>FilmModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="FilmModel_v2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FilmModel_v2.edmx</DependentUpon>
+      <LastGenOutput>FilmModel_v2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FilmModel_v2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FilmModel_v2.edmx</DependentUpon>
+      <LastGenOutput>FilmModel_v2.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

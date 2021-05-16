@@ -26,6 +26,10 @@
         <AssociationConnector Association="film1e4Model.parrution_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="film1e4Model.realisateur_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="film1e4Model.spectateur_ibfk_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="film1e4Model.reserver" Width="1.5" PointX="8.25" PointY="10.875" />
+        <AssociationConnector Association="film1e4Model.reserver_ibfk_2" />
+        <AssociationConnector Association="film1e4Model.reserver_ibfk_1" />
+        <AssociationConnector Association="film1e4Model.film_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
