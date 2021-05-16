@@ -84,6 +84,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="1" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="20">
                 <TextBlock Text="Prénom "/>
                 <TextBox Width="110" Name="txtPrenomSpectateur"/>
@@ -101,29 +102,32 @@
         </Grid>
         <Button Name="btnInscription" Content="Inscription du spectateur" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top"
                 Grid.Column="2" Grid.Row="5" Width="200" Click="btnInscription_Click"/>
-        
-        <TextBlock Text="Sélection du spectateur" Grid.Row="6" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <ComboBox Name="cboSpectateurs" Grid.Row="6" Grid.Column="2" Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+
+        <Grid Grid.Row="6" Grid.Column="2">
+            <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="1"/>
+            <TextBlock Text="Sélection du spectateur" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <ComboBox Name="cboSpectateurs" Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                   SelectionChanged="cboSpectateurs_SelectionChanged">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <!--a modifier pour tout faire rentrer correctement-->
-                        <WrapPanel>
-                            <TextBlock Text="{Binding personne.Prenom}"/>
-                            <TextBlock Text=" "/>
-                            <TextBlock Text="{Binding personne.Nom}"/>
-                        </WrapPanel>
-                        <TextBlock Text="{Binding personne.DateNaissance}"/>
-                        <TextBlock Text="{Binding Adresse}"/>
-                        <TextBlock Text="{Binding Mail}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <DatePicker Name="dpDate" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right"/>
-        <Button x:Name="btnReservation" Grid.Column="2" Grid.Row="6" Content="Réserver" FontSize="15" Height="25" Width="200" Click="btnReservation_Click"
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <!--a modifier pour tout faire rentrer correctement-->
+                            <WrapPanel>
+                                <TextBlock Text="{Binding personne.Prenom}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding personne.Nom}"/>
+                            </WrapPanel>
+                            <TextBlock Text="{Binding personne.DateNaissance}"/>
+                            <TextBlock Text="{Binding Adresse}"/>
+                            <TextBlock Text="{Binding Mail}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <DatePicker Name="dpDate" HorizontalAlignment="Right"/>
+            <Button x:Name="btnReservation" Content="Réserver" FontSize="15" Height="25" Width="200" Click="btnReservation_Click"
                 HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        </Grid>
 
         <TextBlock Text="Liste des inscriptions du Spectateur" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
         <ListView x:Name="lstReservation" Grid.Row="8" Grid.Column="2" Grid.RowSpan="3" SelectionChanged="lstReservation_SelectionChanged">

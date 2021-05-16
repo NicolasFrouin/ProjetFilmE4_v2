@@ -25,7 +25,7 @@
     <Grid Background="Azure">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -71,10 +71,6 @@
             </ListBox.ItemsPanel>
         </ListBox>
 
-
-
-
-
         <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -92,6 +88,8 @@
             </StackPanel>
             <Button x:Name="btnAjoutGenre" Content="Ajouter un genre" Grid.Row="2" Height="25" VerticalAlignment="Top" Click="btnAjoutGenre_Click"/>
         </Grid>
+
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="1" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2"/>
 
         <TextBlock Text="Sélection d'un réalisateur" Grid.Column="2" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
         <ComboBox Name="cboRealisateur" Grid.Column="2" Grid.Row="4" Width="200" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left"
@@ -117,13 +115,13 @@
         </ComboBox>
 
         <WrapPanel Grid.Row="5" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-            <TextBlock Text="Saisir le nom du film"/>
-            <TextBox Name="txtNomFilm" Width="110"/>
+            <TextBlock Text="Nom du film"/>
+            <TextBox Name="txtNomFilm" Width="200"/>
             <Line Width="25" Height="100"/>
-            <TextBlock Text="Saisir le nombre d'entrées"/>
+            <TextBlock Text="Nombre d'entrées"/>
             <TextBox Name="txtNbEntrees"/>
             <Line Width="25" Height="100"/>
-            <TextBlock Text="Saisir la durée du film (hh:mm:ss)"/>
+            <TextBlock Text="Durée du film (hh:mm:ss)"/>
             <TextBox Name="txtDureeFilm"/>
         </WrapPanel>
 
