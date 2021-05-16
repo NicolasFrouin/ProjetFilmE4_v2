@@ -41,7 +41,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Administration des Films" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
+        <TextBlock Text="Administration des Spectateurs" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
                    HorizontalAlignment="Center" FontSize="55" FontFamily="Monotype Corsiva"/>
         <TextBlock Text="Liste des films" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"/>
         <ListView Name="lstFilms" Grid.Row="2" Grid.RowSpan="3" SelectionChanged="lstFilms_SelectionChanged">
@@ -86,20 +86,63 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="20">
                 <TextBlock Text="Prénom "/>
-                <TextBox Width="110"/>
+                <TextBox Width="110" Name="txtPrenomSpectateur"/>
                 <Line Width="15"/>
                 <TextBlock Text="Nom "/>
-                <TextBox Width="110"/>
+                <TextBox Width="110" Name="txtNomSpectateur"/>
                 <Line Width="15"/>
                 <TextBlock Text="Date de naissance "/>
-                <TextBox Width="70"/>
+                <TextBox Width="70" Name="txtDateNaissanceSpectateur"/>
             </StackPanel>
             <TextBlock Text="Adresse" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="15"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="15" Name="txtAdresseSpectateur"/>
             <TextBlock Text="Mail" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="15"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="15" Name="txtMailSpectateur"/>
         </Grid>
+        <Button Name="btnInscription" Content="Inscription du spectateur" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top"
+                Grid.Column="2" Grid.Row="5" Width="200" Click="btnInscription_Click"/>
+        
+        <TextBlock Text="Sélection du spectateur" Grid.Row="6" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox Name="cboSpectateurs" Grid.Row="6" Grid.Column="2" Height="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                  SelectionChanged="cboSpectateurs_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <!--a modifier pour tout faire rentrer correctement-->
+                        <WrapPanel>
+                            <TextBlock Text="{Binding personne.Prenom}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding personne.Nom}"/>
+                        </WrapPanel>
+                        <TextBlock Text="{Binding personne.DateNaissance}"/>
+                        <TextBlock Text="{Binding Adresse}"/>
+                        <TextBlock Text="{Binding Mail}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <DatePicker Name="dpDate" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right"/>
+        <Button x:Name="btnReservation" Grid.Column="2" Grid.Row="6" Content="Réserver" FontSize="15" Height="25" Width="200" Click="btnReservation_Click"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
-        <Button x:Name="btnInscription" Grid.Column="2" Grid.Row="10" Content="Inscription" FontSize="20"/>
+        <TextBlock Text="Liste des inscriptions du Spectateur" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
+        <ListView x:Name="lstReservation" Grid.Row="8" Grid.Column="2" Grid.RowSpan="3" SelectionChanged="lstReservation_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Image" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="25"/>
+                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Titre}" Width="180"/>
+                    <GridViewColumn Header="Durée" DisplayMemberBinding="{Binding Duree}" Width="65"/>
+                    <GridViewColumn Header="Nombre d'entrées" DisplayMemberBinding="{Binding NbEntrees}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>

@@ -68,6 +68,7 @@ namespace FilmWPF
 
         private void btnAjoutGenre_Click(object sender, RoutedEventArgs e)
         {
+            // ajouter un genre
             if (txtLibelleGenre.Text == "")
             {
                 MessageBox.Show("Veuillez entrer le libellé du genre");
@@ -76,11 +77,13 @@ namespace FilmWPF
             {
                 gst.genre.Add(new genre() { Libelle = txtLibelleGenre.Text });
                 gst.SaveChanges();
+                cboGenre.ItemsSource = gst.genre.ToList();
             }
         }
 
         private void btnAjouterFilm_Click(object sender, RoutedEventArgs e)
         {
+            // ajouter un film avec les jouer correspondants
             if (txtNomFilm.Text == "")
             {
                 MessageBox.Show("Veuillez entrer le nom du film");
@@ -107,19 +110,26 @@ namespace FilmWPF
             }
             else
             {
+                string imageFilm = Interaction.InputBox("Auriez-vous le lien d'une image du film en question ?\nSi vous n'en avez pas, laissez vide.", 
+                    "Image du film"); // pour utiliser le Interactoin.InputBox, il faut "using Microsoft.VisualBasic;"
+                if (imageFilm == "")
+                {
+                    imageFilm = "https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-movie-board-icon-image_1455346.jpg";
+                }
                 film f = new film
                 {
                     NbEntrees = int.Parse(txtNbEntrees.Text),
                     Duree = TimeSpan.Parse(txtDureeFilm.Text),
                     NumRealisateur = (cboRealisateur.SelectedItem as realisateur).Id,
                     Titre = txtNomFilm.Text,
-                    Image = ""
+                    Image = imageFilm
                 };
                 gst.film.Add(f);
                 gst.SaveChanges(); // pour que l'Id du film soit donnée par la bdd en auto-incrément
                 foreach (acteur a in lstAllActeurs.SelectedItems)
                 {
-                    string leRole = Interaction.InputBox("Quel rôle a joué " + a.personne.Prenom + " " + a.personne.Nom + " ?", "Définition des rôles"); // pour utiliser le Interactoin.InputBox, il faut "using Microsoft.VisualBasic;"
+                    string leRole = Interaction.InputBox("Quel rôle a joué " + a.personne.Prenom + " " + a.personne.Nom + " ?", 
+                        "Définition des rôles"); // pour utiliser le Interactoin.InputBox, il faut "using Microsoft.VisualBasic;"
                     jouer j = new jouer
                     {
                         NumFilm = gst.film.ToList().FindLast(fi => fi.Titre == txtNomFilm.Text).Id,
@@ -129,6 +139,7 @@ namespace FilmWPF
                     gst.jouer.Add(j);
                 }
                 gst.SaveChanges();
+                lstFilms.ItemsSource = gst.film.ToList();
             }
         }
     }
